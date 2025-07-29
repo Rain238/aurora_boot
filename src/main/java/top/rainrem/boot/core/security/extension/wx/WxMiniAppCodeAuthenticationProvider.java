@@ -18,6 +18,7 @@ import top.rainrem.boot.system.service.UserService;
 
 /**
  * 微信小程序Code认证Provider
+ *
  * @author LightRain
  * @since 2025年7月25日19:59:56
  */
