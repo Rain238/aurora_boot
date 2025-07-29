@@ -8,8 +8,8 @@ import top.rainrem.boot.core.security.model.AuthenticationToken;
 /**
  * 认证服务接口
  *
- * @author Ray.Hao
- * @since 2.4.0
+ * @author LightRain
+ * @since 2025年7月29日18:09:58
  */
 public interface AuthService {
 
