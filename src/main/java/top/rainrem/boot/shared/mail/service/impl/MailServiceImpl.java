@@ -17,8 +17,8 @@ import java.io.File;
 /**
  * 邮件服务实现类
  *
- * @author Ray
- * @since 2024/8/17
+ * @author LightRain
+ * @since 2025年7月29日18:09:44
  */
 @Slf4j
 @Service
