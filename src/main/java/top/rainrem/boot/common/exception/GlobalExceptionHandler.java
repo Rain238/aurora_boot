@@ -48,7 +48,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BindException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(BindException e) {
-        log.error("BindException:{}", e.getMessage());
+        log.error("BindException:{}", e.getMessage(),e);
         String msg = e.getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining("；"));
         return Result.failed(ResultCode.USER_REQUEST_PARAMETER_ERROR, msg);
     }
@@ -62,7 +62,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(ConstraintViolationException e) {
-        log.error("ConstraintViolationException:{}", e.getMessage());
+        log.error("ConstraintViolationException:{}", e.getMessage(),e);
         String msg = e.getConstraintViolations().stream().map(ConstraintViolation::getMessage).collect(Collectors.joining("；"));
         return Result.failed(ResultCode.INVALID_USER_INPUT, msg);
     }
@@ -76,7 +76,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(MethodArgumentNotValidException e) {
-        log.error("MethodArgumentNotValidException:{}", e.getMessage());
+        log.error("MethodArgumentNotValidException:{}", e.getMessage(),e);
         String msg = e.getBindingResult().getAllErrors().stream().map(DefaultMessageSourceResolvable::getDefaultMessage).collect(Collectors.joining("；"));
         return Result.failed(ResultCode.INVALID_USER_INPUT, msg);
     }
@@ -89,7 +89,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(NoHandlerFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public <T> Result<T> processException(NoHandlerFoundException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         return Result.failed(ResultCode.INTERFACE_NOT_EXIST);
     }
 
@@ -101,7 +101,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MissingServletRequestParameterException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(MissingServletRequestParameterException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         return Result.failed(ResultCode.REQUEST_REQUIRED_PARAMETER_IS_EMPTY);
     }
 
@@ -113,7 +113,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(MethodArgumentTypeMismatchException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         return Result.failed(ResultCode.PARAMETER_FORMAT_MISMATCH, "类型错误");
     }
 
@@ -125,7 +125,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(ServletException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(ServletException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         return Result.failed(e.getMessage());
     }
 
@@ -137,7 +137,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(IllegalArgumentException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> handleIllegalArgumentException(IllegalArgumentException e) {
-        log.error("非法参数异常，异常原因：{}", e.getMessage());
+        log.error("非法参数异常，异常原因：{}", e.getMessage(),e);
         return Result.failed(e.getMessage());
     }
 
@@ -149,7 +149,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(JsonProcessingException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> handleJsonProcessingException(JsonProcessingException e) {
-        log.error("Json转换异常，异常原因：{}", e.getMessage());
+        log.error("Json转换异常，异常原因：{}", e.getMessage(),e);
         return Result.failed(e.getMessage());
     }
 
@@ -161,7 +161,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(HttpMessageNotReadableException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(HttpMessageNotReadableException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         String errorMessage = "请求体不可为空";
         Throwable cause = e.getCause();
         if (cause != null) {
@@ -178,7 +178,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(TypeMismatchException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> processException(TypeMismatchException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         return Result.failed(e.getMessage());
     }
 
@@ -190,7 +190,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BadSqlGrammarException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public <T> Result<T> handleBadSqlGrammarException(BadSqlGrammarException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         String errorMsg = e.getMessage();
         if (StrUtil.isNotBlank(errorMsg) && errorMsg.contains("denied to user")) {
             return Result.failed(ResultCode.DATABASE_ACCESS_DENIED);
@@ -207,7 +207,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(SQLSyntaxErrorException.class)
     @ResponseStatus(HttpStatus.FORBIDDEN)
     public <T> Result<T> processSQLSyntaxErrorException(SQLSyntaxErrorException e) {
-        log.error(e.getMessage());
+        log.error(e.getMessage(),e);
         return Result.failed(e.getMessage());
     }
 
@@ -219,7 +219,7 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(BusinessException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public <T> Result<T> handleBizException(BusinessException e) {
-        log.error("biz exception");
+        log.error("biz exception",e);
         if (e.getResultCode() != null) {
             return Result.failed(e.getResultCode(), e.getMessage());
         }
