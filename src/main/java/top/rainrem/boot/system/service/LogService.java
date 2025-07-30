@@ -12,6 +12,7 @@ import java.time.LocalDate;
 
 /**
  * 系统日志服务接口
+ *
  * @author LightRain
  * @since 2025年7月27日13:43:32
  */
