@@ -47,7 +47,7 @@ public class UserAuthCredentials {
     /**
      * 数据权限范围，用于控制用户可以访问的数据级别
      *
-     * @see com.youlai.boot.common.enums.DataScopeEnum
+     * @see top.rainrem.boot.common.enums.DataScopeEnum
      */
     private Integer dataScope;
 
